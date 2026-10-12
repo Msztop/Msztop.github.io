@@ -1,16 +1,3 @@
-
-
-[![Msztop](https://img.shields.io/badge/Msztop-github-blue?logo=githubb)](https://github.com/Msztop)
-
-
-
 #### Contact
 
-Email: 
-
-#### Education
-
-
-#### Research Interests
-
-
+Email: [z3103739808@gmail.com](mailto:z3103739808@gmail.com)
