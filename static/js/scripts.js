@@ -53,14 +53,6 @@ window.addEventListener('DOMContentLoaded', event => {
         fetch(content_dir + name + '.md')
             .then(response => response.text())
             .then(markdown => {
-                const section = document.getElementById(name);
-                const navLink = document.querySelector(`#navbarResponsive a[href="#${name}"]`);
-                if (name !== 'home' && !markdown.trim()) {
-                    section.hidden = true;
-                    if (navLink) navLink.closest('.nav-item').hidden = true;
-                    return;
-                }
-
                 const html = marked.parse(markdown);
                 document.getElementById(name + '-md').innerHTML = html;
             }).then(() => {
