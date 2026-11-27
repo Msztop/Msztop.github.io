@@ -39,7 +39,7 @@ $$
 $$
 y =
 \begin{cases}
-1, & z \geq \theta \\
+1, & z \geq \theta \\\\
 0, & z < \theta
 \end{cases}
 $$
