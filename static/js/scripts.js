@@ -109,10 +109,30 @@
     return { region, hasMath: /\$\$|\$[^$\n]+\$|\\\(|\\\[|\\begin\{/.test(markdown) };
   }
 
+  async function renderNote(entry) {
+    const region = entry.querySelector(".note-body");
+
+    try {
+        const markdown = await source(entry.dataset.source);
+        region.innerHTML = window.marked.parse(markdown);
+
+        return {
+            region,
+            hasMath: /\$|\\\(|\\\[|\\begin\{/.test(markdown)
+        };
+    } catch (error) {
+        region.textContent = "文章加载失败。";
+        console.error(error);
+        throw error;
+    }
+}
   async function hydrateSections() {
     if (!window.marked) return;
     window.marked.use({ mangle: false, headerIds: false });
-    const results = await Promise.allSettled(["home", "publications", "awards"].map(renderSection));
+    const results = await Promise.allSettled([
+    ...["home", "publications", "awards"].map(renderSection),
+    ...entries.filter(entry => entry.dataset.source).map(renderNote)
+]);
     const mathRegions = results.filter((item) => item.status === "fulfilled" && item.value.hasMath)
       .map((item) => item.value.region);
     if (!mathRegions.length) return;
